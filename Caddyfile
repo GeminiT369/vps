@@ -1,5 +1,6 @@
 :8888
-
+root * /usr/share/caddy
+file_server browse
 
 #log {
 #	output stdout
@@ -17,8 +18,6 @@ route /wstunnel/* {
 }
 
 
-route /* {
-	root * /usr/share/caddy
-	file_server browse
-	# reverse_proxy localhost:8080
-}
+#route /* {
+#	reverse_proxy localhost:8080
+#}
