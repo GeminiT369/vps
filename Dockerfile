@@ -3,7 +3,7 @@ MAINTAINER geminit369
 ENV LANG C.UTF-8
 
 RUN apt update && apt install ssh wget screen -y &&\
-    mkdir -p /run/sshd&&\
+    mkdir -p /run/sshd /usr/share/caddy &&\
     echo 'PermitRootLogin yes' >>  /etc/ssh/sshd_config &&\
     echo root:xwybest|chpasswd
 	
