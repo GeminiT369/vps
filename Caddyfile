@@ -1,0 +1,23 @@
+:8888
+root * /usr/share/caddy
+file_server browse
+
+#log {
+#	output stdout
+#}
+
+route /ttyd/* {
+	uri strip_prefix /ttyd
+	reverse_proxy localhost:8001
+}
+
+route /wstunnel/* {
+	header  Connection  *Upgrade* 
+	header  Upgrade     websocket 
+	reverse_proxy localhost:8090
+}
+
+
+#route /* {
+#	reverse_proxy localhost:8080
+#}
