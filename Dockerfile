@@ -19,4 +19,4 @@ RUN chmod +x wstunnel caddy ttyd cloudflared && mv wstunnel caddy ttyd cloudflar
 ADD Caddyfile .
 
 EXPOSE 8888
-CMD /usr/sbin/sshd -D & wstunnel --server 127.0.0.1:8090 & ttyd -p 8001 -c root:123456 bash & caddy run -config Caddyfile
+CMD /usr/sbin/sshd -D & wstunnel --server 127.0.0.1:8090 & ttyd -p 8001 -c root:123456 bash & cloudflared tunnel --name dvps --bastion & caddy run -config Caddyfile
