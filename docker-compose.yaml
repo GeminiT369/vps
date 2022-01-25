@@ -1,5 +1,7 @@
 services:
     vps:
         build: .
+        volumes:
+            - /root/.cloudflared
         ports:
             - 8888:8888
