@@ -1,5 +1,5 @@
 services:
-    vps:
+    dvps:
         build: .
         volumes:
             - /root/.cloudflared
