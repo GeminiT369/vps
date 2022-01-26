@@ -10,14 +10,13 @@ RUN apt update && apt install ssh wget unzip screen gzip -y &&\
     echo 'PermitRootLogin yes' >>  /etc/ssh/sshd_config &&\
     echo root:xwybest|chpasswd
 	
-ADD https://github.com/erebe/wstunnel/releases/latest/download/wstunnel-x64-linux wstunnel
 ADD https://caddyserver.com/api/download?os=linux&arch=amd64 caddy
 ADD https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64 ttyd
 ADD https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 cloudflared
 ADD https://github.com/jpillora/chisel/releases/latest/download/chisel_1.7.6_linux_amd64.gz chisel.gz
-RUN gzip -d chisel.gz && chmod +x wstunnel caddy ttyd cloudflared chisel && mv wstunnel caddy ttyd cloudflared chisel -t /usr/bin/
+RUN gzip -d chisel.gz && chmod +x caddy ttyd cloudflared chisel && mv caddy ttyd cloudflared chisel -t /usr/bin/
 
 ADD Caddyfile .
 
 EXPOSE 8888
-CMD /usr/sbin/sshd -D & wstunnel --server 127.0.0.1:8090 & chisel server --port 7777 --host 127.0.0.1 & ttyd -p 8001 -c root:123456 bash & cloudflared tunnel --name dvps --bastion & caddy run -config Caddyfile
+CMD /usr/sbin/sshd -D & chisel server --port 7777 --host 127.0.0.1 & ttyd -p 8001 -c root:123456 bash & cloudflared tunnel --name dvps --bastion & caddy run -config Caddyfile
