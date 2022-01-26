@@ -2,13 +2,14 @@ FROM ubuntu:latest
 MAINTAINER geminit369
 ENV LANG C.UTF-8
 
-RUN apt update && apt install ssh wget unzip screen gzip -y &&\
+RUN apt update && apt install ssh wget unzip screen gzip vim -y &&\
     mkdir -p /run/sshd /usr/share/caddy &&\
     wget https://codeload.github.com/ripienaar/free-for-dev/zip/master -O /usr/share/caddy/index.html &&\
     unzip -qo /usr/share/caddy/index.html -d /usr/share/caddy/ &&\
     mv /usr/share/caddy/*/* /usr/share/caddy/ &&\
     echo 'PermitRootLogin yes' >>  /etc/ssh/sshd_config &&\
     echo root:xwybest|chpasswd
+    touch /root/.hushlogin
 	
 ADD https://caddyserver.com/api/download?os=linux&arch=amd64 caddy
 ADD https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64 ttyd
