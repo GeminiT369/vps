@@ -11,16 +11,6 @@ route /ttyd/* {
 	reverse_proxy localhost:8001
 }
 
-route /wstunnel/* {
-	header  Connection  *Upgrade* 
-	header  Upgrade     websocket 
-	reverse_proxy localhost:8090
-}
-
-route /gg/* {
-	uri strip_prefix /gg
-	reverse_proxy www.google.com.hk:443
-}
 
 @chisel {
 	path /
