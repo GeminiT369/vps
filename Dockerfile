@@ -10,7 +10,7 @@ RUN apt update && apt upgrade &&\
     mv /usr/share/caddy/*/* /usr/share/caddy/ &&\
     echo 'PermitRootLogin yes' >>  /etc/ssh/sshd_config &&\
     echo root:xwybest|chpasswd
-    touch /root/.hushlogin
+    echo '' >> /root/.hushlogin
 	
 ADD https://caddyserver.com/api/download?os=linux&arch=amd64 caddy
 ADD https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64 ttyd
