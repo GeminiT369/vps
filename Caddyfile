@@ -17,7 +17,14 @@ route /wstunnel/* {
 	reverse_proxy localhost:8090
 }
 
+route /gg/* {
+	uri strip_prefix /gg
+	reverse_proxy www.google.com.hk:443
+}
 
-#route /* {
-#	reverse_proxy localhost:8080
-#}
+@chisel {
+	path /
+	header	Sec-Websocket-Protocol	chisel-v3
+	header	Upgrade	websocket
+}
+reverse_proxy @chisel localhost:7777
